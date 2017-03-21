@@ -1,5 +1,5 @@
 target
 .DS_Store
-ZeetCode/.settings/
-ZeetCode/.classpath
-ZeetCode/bin/
+*e/.settings/
+*/.classpath
+*/bin/
