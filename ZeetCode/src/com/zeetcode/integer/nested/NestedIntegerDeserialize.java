@@ -6,40 +6,46 @@ import java.util.Stack;
 public class NestedIntegerDeserialize {
 	public NestedInteger deserialize(String s) {
 
-		Stack<String> stack = new Stack<String>();
-		Stack<NestedInteger> nestedIntStack = new Stack<NestedInteger>();
+		Stack<NestedInteger> stack = new Stack<NestedInteger>();
+		String temp = "";
 
-		NestedInteger root = new NestedIntegerImpl();
-		stack.add(s);
-		nestedIntStack.add(root);
-
-		String top;
-		NestedInteger nestedInt;
-		while (!stack.isEmpty()) {
-			top = stack.pop();
-			nestedInt = nestedIntStack.pop();
-
-			if (top.charAt(0) == '[' && top.charAt(top.length() - 1) == ']') {
-				String[] e = top.substring(1, top.length() - 1).split(",");
-
-				for (int i = 0; i < e.length; i++) {
-					nestedInt.add(new NestedIntegerImpl());
+		for (char c : s.toCharArray()) {
+			if (c == '[') {
+				stack.push(new NestedIntegerImpl());
+			} else if (c == ']') {
+				if (!temp.equals("")) {
+					// add NI to parent
+					stack.peek().add(new NestedIntegerImpl(Integer.parseInt(temp)));
+					temp = "";
 				}
 
-				List<NestedInteger> list = nestedInt.getList();
-				for (int i = list.size() - 1; i >= 0; i--) {
-					nestedIntStack.push(list.get(i));
-					stack.push(e[i]);
+				NestedInteger top = stack.pop();
+				if (!stack.empty()) {
+					stack.peek().add(top);
+				} else {
+					return top;
+				}
+
+			} else if (c == ',') {
+				if (!temp.equals("")) {
+					// add NI to parent
+					stack.peek().add(new NestedIntegerImpl(Integer.parseInt(temp)));
+					temp = "";
 				}
 
 			} else {
-				nestedInt.setInteger(Integer.parseInt(top));
+				temp += c;
 			}
 		}
 
-		return root;
+		// cases when String is just a integer
+		if (!temp.equals("")) {
+			return new NestedIntegerImpl(Integer.parseInt(temp));
+		}
+		
+		return null;
 	}
-	
+
 	public static void main(String[] args) {
 		String s = "[123,[456,[789]]]";
 		NestedIntegerDeserialize d = new NestedIntegerDeserialize();
