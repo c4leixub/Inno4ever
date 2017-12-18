@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
-import com.zeetcode.array.string.WordLadder.WordNode;
-
 public class WordLadder2 {
 
 	class WordNode {

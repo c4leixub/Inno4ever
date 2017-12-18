@@ -1,4 +1,4 @@
-package com.zeetcode.tree.traversal;
+package com.zeetcode.aalk.tree;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -7,10 +7,9 @@ import java.util.Queue;
 
 import com.zeetcode.node.TreeNode;
 
-public class LevelOrderTraversal {
-	public List<List<Integer>> levelOrder(TreeNode root) {
-		List<List<Integer>> result = new ArrayList<List<Integer>>();
-
+public class FindLargestByLevel {
+	public List<Integer> largestValues(TreeNode root) {
+		List<Integer> result = new ArrayList<Integer>();
 		if (root == null) {
 			return result;
 		}
@@ -30,14 +29,17 @@ public class LevelOrderTraversal {
 		}
 
 		return result;
+
 	}
 
-	private void traverseHelper(Queue<TreeNode> q1, Queue<TreeNode> q2, List<List<Integer>> result) {
-		List<Integer> list = new ArrayList<Integer>();
+	private void traverseHelper(Queue<TreeNode> q1, Queue<TreeNode> q2, List<Integer> result) {
+		int max = Integer.MIN_VALUE;
 		TreeNode node;
+
 		while (!q1.isEmpty()) {
 			node = q1.poll();
-			list.add(node.val);
+			max = Math.max(max, node.val);
+
 			if (node.left != null) {
 				q2.add(node.left);
 			}
@@ -46,6 +48,7 @@ public class LevelOrderTraversal {
 				q2.add(node.right);
 			}
 		}
-		result.add(list);
+
+		result.add(max);
 	}
 }

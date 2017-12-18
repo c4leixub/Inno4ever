@@ -1,4 +1,4 @@
-package com.zeetcode.tree.traversal;
+package com.zeetcode.aalk.tree;
 
 import java.util.ArrayList;
 import java.util.List;

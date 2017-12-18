@@ -1,4 +1,4 @@
-package com.zeetcode.string.linkedin;
+package com.zeetcode.aalk.string;
 
 import java.util.ArrayList;
 import java.util.HashMap;

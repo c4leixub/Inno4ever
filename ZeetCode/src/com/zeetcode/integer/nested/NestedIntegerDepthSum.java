@@ -11,15 +11,15 @@ import java.util.Queue;
 public class NestedIntegerDepthSum {
 	
 	public int depthSum(List<NestedInteger> input) {
-		return depth(input, 1);
+		return depthSum(input, 1);
 	}
-	public int depth(List<NestedInteger> input, int depth) {
+	public int depthSum(List<NestedInteger> input, int depth) {
 		int sum = 0;
 		for (NestedInteger i : input) {
 			if (i.isInteger()) {
 				sum += i.getInteger() * depth;
 			} else {
-				sum += depth(i.getList(), depth+1);
+				sum += depthSum(i.getList(), depth+1);
 			}
 		}
 		
@@ -52,11 +52,10 @@ public class NestedIntegerDepthSum {
 		}
 	}
 	
-	public int reverseDepthSumOnePass(List<NestedInteger> input) {
-		
+	public int reverseDepthSumOnePass(List<NestedInteger> nestedList) {
 		int sum = 0;
 		int reverseDepthSum = 0;
-		List<NestedInteger> cur = input;
+		List<NestedInteger> cur = nestedList;
 		List<NestedInteger> next = new ArrayList<NestedInteger>();
 		for (NestedInteger nestedInteger : cur) {
 			if (nestedInteger.isInteger()) {
@@ -70,47 +69,53 @@ public class NestedIntegerDepthSum {
 		next = new ArrayList<NestedInteger>();
 		
 		while (cur.size() != 0) {
-			for (NestedInteger nestedList : cur) {
-				for (NestedInteger nestedInteger : nestedList.getList()) {
+			for (NestedInteger list : cur) {
+				for (NestedInteger nestedInteger : list.getList()) {
 					if (nestedInteger.isInteger()) {
 						sum += nestedInteger.getInteger();
 					} else {
 						next.add(nestedInteger);
 					}
 				}
-				reverseDepthSum += sum;
-				cur = next;
-				next = new ArrayList<NestedInteger>();
 			}
+            reverseDepthSum += sum;
+			cur = next;
+			next = new ArrayList<NestedInteger>();
 		}
 		return reverseDepthSum;
 	}
 	
-	public int depthSumInverse(List<NestedInteger> input) {
-		List<Integer> sums = new ArrayList<Integer>();
-		depthSumInverse(input, 1, sums);
-		
-		int sum = 0, reverseDepthSum = 0, depth = 1;
-		while (depth < sums.size()) {
-			sum += sums.get(depth);
-			reverseDepthSum += sum;
-			depth++;
-		}
-		
-		return reverseDepthSum;
-	}
-	public void depthSumInverse(List<NestedInteger> input, int depth, List<Integer> sums) {
-		for (NestedInteger n : input) {
-			if (n.isInteger()) {
-				while (sums.size() < depth) {
-					sums.add(0);
-				}
-				sums.set(depth, sums.get(depth-1)+n.getInteger());
-			} else {
-				depthSumInverse(n.getList(), depth+1, sums);
-			}
-		}
-	}
+	public int depthSumInverse(List<NestedInteger> nestedList) {
+        Map<Integer, Integer> depthToSum = new HashMap<Integer, Integer>();
+        int maxDepth = depthSumInverse(nestedList, 1, depthToSum);
+        
+        int sum = 0, depth = 1;
+        while (depth <= maxDepth) {
+            if (depthToSum.containsKey(depth)) {
+                sum += depthToSum.get(depth) * (maxDepth-depth+1);
+            }           
+            depth++;
+        }
+        
+        return sum;
+    }
+    
+    public int depthSumInverse(List<NestedInteger> nestedList, int depth, Map<Integer, Integer> depthToSum) {
+        
+        int maxDepth = depth;
+        for (NestedInteger e : nestedList) {
+            if (e.isInteger()) {
+                if (!depthToSum.containsKey(depth)) {
+                    depthToSum.put(depth, 0);
+                }
+                depthToSum.put(depth, depthToSum.get(depth) + e.getInteger());
+            } else {
+                maxDepth = Math.max(maxDepth, depthSumInverse(e.getList(), depth+1, depthToSum));
+            }
+        }
+        
+        return maxDepth;
+    }
 	
 	
 	public int reverseDepthSumQueue(List<NestedInteger> input) {
@@ -172,19 +177,21 @@ public class NestedIntegerDepthSum {
 		i = new NestedIntegerImpl(Arrays.asList(new NestedIntegerImpl(1), new NestedIntegerImpl(1)));
 		input.add(i);
 		
-		System.out.println(input);
-		System.out.println(s.depthSum(input));
-		System.out.println(s.reverseDepthSum(input));
+		//System.out.println(s.depthSumInverse(input));
 		
-		input = new ArrayList<NestedInteger>();
-		input.add(new NestedIntegerImpl(1));
-		input.add(new NestedIntegerImpl(Arrays.asList(new NestedIntegerImpl(4), new NestedIntegerImpl(Arrays.asList(new NestedIntegerImpl(6))))));
-		
-		System.out.println(input);
-		
-		System.out.println(s.reverseDepthSum(input));
+//		System.out.println(input);
+//		System.out.println(s.depthSum(input));
+//		System.out.println(s.reverseDepthSum(input));
+//		
+//		input = new ArrayList<NestedInteger>();
+//		input.add(new NestedIntegerImpl(1));
+//		input.add(new NestedIntegerImpl(Arrays.asList(new NestedIntegerImpl(4), new NestedIntegerImpl(Arrays.asList(new NestedIntegerImpl(6))))));
+//		
+//		System.out.println(input);
+//		
+//		System.out.println(s.reverseDepthSum(input));
 		System.out.println(s.reverseDepthSumOnePass(input));
-		System.out.println(s.reverseDepthSumQueue(input));
+//		System.out.println(s.reverseDepthSumQueue(input));
 		
 	}
 }

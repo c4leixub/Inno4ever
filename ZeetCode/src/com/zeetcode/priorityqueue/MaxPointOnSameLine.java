@@ -24,10 +24,10 @@ public class MaxPointOnSameLine {
         			}
         		} else {
 	        		Double slope = slope(points[i], points[j]);
-	                if (!result.containsKey(slope)) {
-	                    result.put(slope, 2);
-	                } else {
+	                if (result.containsKey(slope)) {
 	                	result.put(slope, result.get(slope) + 1);
+	                } else {
+	                	result.put(slope, 2);
 	                }
         		}
                 

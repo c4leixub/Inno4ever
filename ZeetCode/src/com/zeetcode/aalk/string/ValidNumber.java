@@ -1,4 +1,4 @@
-package com.zeetcode.string.linkedin;
+package com.zeetcode.aalk.string;
 
 /**
  * Validate if a given string is numeric. Some examples:

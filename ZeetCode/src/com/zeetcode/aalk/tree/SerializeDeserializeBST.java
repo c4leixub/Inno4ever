@@ -1,4 +1,4 @@
-package com.zeetcode.tree.build;
+package com.zeetcode.aalk.tree;
 
 import com.zeetcode.node.TreeNode;
 
@@ -36,7 +36,6 @@ public class SerializeDeserializeBST {
 			return null;
 
 		TreeNode root = new TreeNode(Integer.parseInt(vals[0]));
-		TreeNode p = root;
 		int i = 1;
 		int nextVal;
 

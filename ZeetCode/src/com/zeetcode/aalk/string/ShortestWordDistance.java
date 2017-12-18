@@ -1,4 +1,4 @@
-package com.zeetcode.array.string;
+package com.zeetcode.aalk.string;
 
 import java.util.ArrayList;
 import java.util.HashMap;
