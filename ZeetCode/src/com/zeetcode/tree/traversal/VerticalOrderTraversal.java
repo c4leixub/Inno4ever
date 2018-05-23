@@ -33,6 +33,7 @@ public class VerticalOrderTraversal {
 			if (!colToVals.containsKey(col)) {
 				colToVals.put(col, new ArrayList<Integer>());
 			}
+			
 			colToVals.get(col).add(node.val);
 			min = Math.min(min, col);
 			max = Math.max(max, col);

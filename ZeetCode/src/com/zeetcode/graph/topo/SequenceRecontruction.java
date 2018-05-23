@@ -1,4 +1,4 @@
-package com.zeetcode.graph;
+package com.zeetcode.graph.topo;
 
 import java.util.HashMap;
 import java.util.HashSet;

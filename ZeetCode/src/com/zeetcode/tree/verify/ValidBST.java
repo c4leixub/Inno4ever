@@ -4,17 +4,18 @@ import com.zeetcode.node.TreeNode;
 
 public class ValidBST {
 	public boolean isValidBST(TreeNode root) {
-		return isValidBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
-	}
-
-	public boolean isValidBST(TreeNode p, double min, double max) {
-		if (p == null)
-			return true;
-
-		if (p.val <= min || p.val >= max)
-			return false;
-
-		return isValidBST(p.left, min, p.val)
-				&& isValidBST(p.right, p.val, max);
-	}
+        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+	
+    private boolean isValidBST(TreeNode root, long min, long max) {
+        if (root == null) {
+            return true;
+        }
+        
+        if (root.val <= min || root.val >= max) {
+            return false;
+        }
+        
+        return isValidBST(root.left, min, root.val) && isValidBST(root.right, root.val, max);
+    }
 }

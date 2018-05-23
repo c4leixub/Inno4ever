@@ -15,6 +15,7 @@ public class SerializeDeserializeBinaryTree {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
+		
 		StringBuilder nulls = new StringBuilder();
 
 		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
