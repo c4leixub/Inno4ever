@@ -24,12 +24,6 @@ public class LetterCombinationsPhoneNumber {
 			return result;
 		}
 
-		// for (int i = 0; i < digits.length(); i++) {
-		// if (digits.charAt(i) < '2' || digits.charAt(i) > '9') {
-		// return result;
-		// }
-		// }
-
 		dfs(digits, 0, new StringBuilder(), result);
 
 		return result;
