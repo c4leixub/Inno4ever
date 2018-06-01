@@ -6,8 +6,9 @@ public class Read4 {
 		return 4;
 	}
 
+	private char[] buffer = new char[4];
+	
 	public int read(char[] buf, int n) {
-		char[] buffer = new char[4];
 		int readBytes = 0;
 		boolean eof = false;
 		
@@ -23,6 +24,32 @@ public class Read4 {
 			readBytes += bytes;
 		}
 		
+		return readBytes;
+	}
+	
+	private int offSet = 0;
+	private int readSize = 0;
+	
+	public int readMultiple(char[] buf, int n) {
+		int readBytes = 0;
+		boolean eof = false;
+		
+		while (!eof && readBytes < n) {
+			if (readSize == 0) {
+				readSize = read4(buffer);
+				if (readSize < 4) {
+					eof = true;
+				}
+			}
+			
+			int bytes = Math.min(n - readBytes, readSize);
+			System.arraycopy(buffer, offSet, buf, readBytes, bytes);
+			
+			offSet = (offSet + bytes) % 4;
+			readSize -= bytes;
+			
+			readBytes += bytes;
+		}
 		return readBytes;
 	}
 }
