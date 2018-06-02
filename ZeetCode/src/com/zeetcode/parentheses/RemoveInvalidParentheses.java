@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * "(a())()"] ")(" -> [""]
  */
 public class RemoveInvalidParentheses {
+	
 	List<String> result = new ArrayList<String>();
 	int max = 0;
 

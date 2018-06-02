@@ -1,7 +1,6 @@
 package com.zeetcode.parentheses;
 
 import java.util.HashMap;
-import java.util.Set;
 import java.util.Stack;
 
 /**
@@ -19,6 +18,7 @@ public class ValidParentheses {
 		map.put('(', ')');
 		map.put('{', '}');
 		map.put('[', ']');
+		
 		char c;
 		for (int i = 0; i < s.length(); i++) {
 			c = s.charAt(i);

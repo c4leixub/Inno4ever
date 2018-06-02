@@ -17,29 +17,26 @@ Return:
  */
 public class GroupAnagram {
 	public List<List<String>> groupAnagrams(String[] strs) {
-	    List<List<String>> result = new ArrayList<List<String>>();
-	 
-	    HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
-	    for(String str: strs){
-	        char[] arr = str.toCharArray();
-	        Arrays.sort(arr);
-	        String ns = new String(arr);
-	 
-	        if(map.containsKey(ns)){
-	            map.get(ns).add(str);
-	        }else{
-	            ArrayList<String> al = new ArrayList<String>();
-	            al.add(str);
-	            map.put(ns, al);
-	        }
-	    }
-	 
-	    for(Map.Entry<String, ArrayList<String>> entry: map.entrySet()){
-	        Collections.sort(entry.getValue());
-	    }
-	 
-	    result.addAll(map.values());
-	 
-	    return result;
-	}
+        Map<String, List<String>> map = new HashMap<String, List<String>>();
+        String key;
+        for (String s : strs) {
+            key = getKey(s);
+            if (!map.containsKey(key)) {
+                map.put(key, new ArrayList<String>());
+            }
+            map.get(key).add(s);
+        }
+        
+        List<List<String>> res = new ArrayList<List<String>>();
+        for (String k : map.keySet()) {
+            res.add(map.get(k));
+        }
+        return res;
+    }
+    
+    private String getKey(String str) {
+        char[] c = str.toCharArray();
+        Arrays.sort(c);
+        return new String(c);
+    }
 }
