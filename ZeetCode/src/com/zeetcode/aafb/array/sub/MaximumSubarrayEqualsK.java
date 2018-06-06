@@ -1,4 +1,4 @@
-package com.zeetcode.array.subarray;
+package com.zeetcode.aafb.array.sub;
 
 import java.util.HashMap;
 

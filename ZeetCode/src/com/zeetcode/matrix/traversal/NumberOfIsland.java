@@ -13,40 +13,36 @@ import java.util.List;
  * 11110 11010 11000 00000 Answer: 1
  */
 public class NumberOfIsland {
+	private int[][] DIRECTION = new int[][] {
+        {-1, 0}, {1, 0}, {0, -1}, {0, 1}
+    };
+	
 	public int numIslands(char[][] grid) {
 		if (grid == null || grid.length == 0 || grid[0].length == 0)
 			return 0;
 
-		int m = grid.length;
-		int n = grid[0].length;
-
-		int count = 0;
-		for (int i = 0; i < m; i++) {
-			for (int j = 0; j < n; j++) {
-				if (grid[i][j] == '1') {
-					count++;
-					merge(grid, i, j);
-				}
-			}
-		}
-
-		return count;
+		int m = grid.length, n = grid[0].length, count = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == '1') {
+                    dfs(grid, m, n, i, j);
+                    count++;
+                }
+            }
+        }
+        return count;
 	}
-
-	public void merge(char[][] grid, int i, int j) {
-		int m = grid.length;
-		int n = grid[0].length;
-
-		if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] != '1')
-			return;
-
-		grid[i][j] = 'X';
-
-		merge(grid, i - 1, j);
-		merge(grid, i + 1, j);
-		merge(grid, i, j - 1);
-		merge(grid, i, j + 1);
-	}
+	private void dfs(char[][] grid, int m, int n, int i, int j) {
+        if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == '0') {
+            return;
+        }
+        
+        grid[i][j] = '0';
+        
+        for (int[] direction : DIRECTION) {
+            dfs(grid, m, n, i + direction[0], j + direction[1]);
+        }
+    }
 
 	public List<Integer> numIslands2(int m, int n, int[][] positions) {
 		int[] rootArray = new int[m * n];
