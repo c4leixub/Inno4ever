@@ -9,26 +9,6 @@ public class TinyUrl {
     private Map<Integer, String> urlMap = new HashMap<Integer, String>();
     private Map<String, String> customUrlMap = new HashMap<String, String>();
     
-    
-    /*
-     * @param long_url: a long url
-     * @param key: a short key
-     * @return: a short url starts with http://tiny.url/
-     */
-    public String createCustom(String long_url, String key) {
-        if (customUrlMap.containsKey(key)) {
-            return "error";
-        }
-        
-        if (urlMap.containsValue(long_url)
-                || customUrlMap.containsValue(long_url)) {
-            return "error";
-        }
-        
-        customUrlMap.put(key, long_url);
-        return DOMAIN + key;
-    }
-
     /*
      * @param long_url: a long url
      * @return: a short url starts with http://tiny.url/
@@ -57,10 +37,6 @@ public class TinyUrl {
         return DOMAIN + path;
     }
 
-    /*
-     * @param short_url: a short url starts with http://tiny.url/
-     * @return: a long url
-     */
     public String shortToLong(String short_url) {
         String path = short_url.substring(DOMAIN.length(), short_url.length());
         
@@ -70,13 +46,13 @@ public class TinyUrl {
         
         int id = 0;
         for (int i = 0; i < path.length(); i++) {
-            id = id * 62 + charToNum(path.charAt(i));
+            id = id * 62 + toBase62(path.charAt(i));
         }
         
         return urlMap.get(id);
     }
     
-    private int charToNum(char c) {
+    private int toBase62(char c) {
         int re = 0; 
         if ('0' <= c && c <= '9') {
             re = c - '0';
@@ -89,5 +65,24 @@ public class TinyUrl {
         }
         
         return re;
+    }
+    
+    /*
+     * @param long_url: a long url
+     * @param key: a short key
+     * @return: a short url starts with http://tiny.url/
+     */
+    public String createCustom(String long_url, String key) {
+        if (customUrlMap.containsKey(key)) {
+            return "error";
+        }
+        
+        if (urlMap.containsValue(long_url)
+                || customUrlMap.containsValue(long_url)) {
+            return "error";
+        }
+        
+        customUrlMap.put(key, long_url);
+        return DOMAIN + key;
     }
 }
