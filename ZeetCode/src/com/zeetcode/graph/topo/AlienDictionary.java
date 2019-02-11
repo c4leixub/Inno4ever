@@ -112,8 +112,8 @@ public class AlienDictionary {
 	public static void main(String[] args) {
 		String[] words = new String[] {
 			//"wrtkj","wrt"
-			//"za","zb","ca","cb"
-				"wrt","wrf","er","ett","rftt","te"
+			"za","zb","ca","cb"
+				//"wrt","wrf","er","ett","rftt","te"
 		};
 		AlienDictionary a = new AlienDictionary();
 		System.out.println(a.alienOrder(words));

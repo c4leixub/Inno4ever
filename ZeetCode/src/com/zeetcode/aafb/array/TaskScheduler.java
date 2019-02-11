@@ -1,7 +1,11 @@
 package com.zeetcode.aafb.array;
 
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Set;
 
 /**
  * Given a char array representing tasks CPU need to do. It contains capital
@@ -41,4 +45,71 @@ public class TaskScheduler {
         
         return Math.max(tasks.length,(maxFreq - 1) * (n+1) + maxFreqCount);
     }
+	
+	public int leastIntervalUsingHeap(char[] tasks, int n) {
+		Map<Character, Integer> charCount = new HashMap<Character, Integer>();
+        for (int i = 0; i < tasks.length; i++) {
+        	charCount.put(tasks[i], charCount.getOrDefault(tasks[i], 0)+1);
+        }
+        
+        PriorityQueue<Character> queue = new PriorityQueue<Character>(
+            new Comparator<Character>() {
+                public int compare(Character c1, Character c2) {
+                    if (charCount.get(c1).intValue() == charCount.get(c2).intValue()) {
+                        return  c1.compareTo(c2);
+                    }
+                    
+                    // the one with higher frequency in the front
+                    return charCount.get(c2) - charCount.get(c1);
+                }
+            }
+        );
+        
+        for (Character c : charCount.keySet()) {
+            queue.add(c);
+        }
+        
+        Set<Character> tmp = new HashSet<Character>();
+        StringBuilder sb = new StringBuilder();
+        while (!queue.isEmpty()) {
+            
+            for (int i = 0; i < n + 1; i++) {
+                if (queue.isEmpty()) {
+                    if (charCount.size() == 0) {
+                        System.out.println("1 Result is " + sb.toString());
+                    	return sb.length();
+                    } else {
+                    	sb.append('|');
+                    	continue;
+                    }
+                }
+                
+                Character c = queue.poll();
+                sb.append(c);
+                
+                charCount.put(c, charCount.get(c)-1);
+                if (charCount.get(c) > 0) {
+                    tmp.add(c);
+                } else {
+                    charCount.remove(c);
+                }
+                
+            }
+            
+            queue.addAll(tmp);
+            tmp.clear();
+        }
+        
+        System.out.println("2 Result is " + sb.toString());
+        return sb.length();
+    }
+	
+	public static void main(String[] args) {
+		TaskScheduler t = new TaskScheduler();
+		char[] tasks = new char[] {'A','A','A','B','B','B'};
+		System.out.println(t.leastIntervalUsingHeap(tasks, 50));
+		
+		tasks = new char[] {'A','A','A','A','B','B','B','C','C','D','D','F','F','G'};
+		System.out.println(t.leastIntervalUsingHeap(tasks, 2));
+	}
 }

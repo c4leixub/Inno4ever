@@ -22,19 +22,22 @@ public class WordBreak {
 			return true;
 		}
 
-		boolean[] dp = new boolean[s.length()];
-		for (int i = 1; i <= s.length(); i++) {
+		int n = s.length();
+		boolean[] dp = new boolean[n + 1];
+		dp[0] = true;
+
+		String word;
+		for (int i = 0; i < n + 1; i++) {
 			for (int j = 0; j < i; j++) {
-				String sub = s.substring(j, i);
-				if (wordSet.contains(sub)) {
-					if (j == 0 || dp[j - 1]) {
-						dp[i - 1] = true;
-					}
+				word = s.substring(j, i);
+				if (dp[j] && wordSet.contains(word)) {
+					dp[i] = true;
+					break;
 				}
 			}
 		}
 
-		return dp[s.length() - 1];
+		return dp[n];
 	}
 
 	public List<String> wordBreak(String s, List<String> wordDict) {
@@ -51,14 +54,14 @@ public class WordBreak {
 		return wordBreakHelper(s, wordSet, map);
 	}
 
-	public List<String> wordBreakHelper(String s, Set<String> wordSet,
-			Map<String, List<String>> map) {
+	public List<String> wordBreakHelper(String s, Set<String> wordSet, Map<String, List<String>> map) {
 
-		if (map.containsKey(s))
+		if (map.containsKey(s)) {
 			return map.get(s);
+		}
 
 		List<String> result = new ArrayList<String>();
-		if (s.length() <= 0) {
+		if (s.length() == 0) {
 			return result;
 		}
 

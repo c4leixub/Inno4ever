@@ -15,7 +15,7 @@ public class BestTimeToBuyStock {
 	 * Assume prices[i] >= 0, maximize prices[j]-prices[i] which means price[i]
 	 * is the min and price[j] is the max
 	 */
-	public int maxProfit(int[] prices) {
+	public int maxProfitOneTransaction(int[] prices) {
 		if (prices == null || prices.length <= 1)
 			return 0;
 
@@ -38,7 +38,7 @@ public class BestTimeToBuyStock {
 	 * 
 	 * This problem can be viewed as finding all ascending sequences.
 	 */
-	public int maxProfit2(int[] prices) {
+	public int maxProfitManyTrnasaction(int[] prices) {
 		int profit = 0;
 		for (int i = 1; i < prices.length; i++) {
 			int diff = prices[i] - prices[i - 1];
@@ -61,4 +61,14 @@ public class BestTimeToBuyStock {
 
 		return profit;
 	}
+	
+	public int maxProfitManyTransactionWithFree(int[] prices, int fee) {
+        int sold = 0, hold = -prices[0];
+        for (int price : prices) {
+            int t = sold;
+            sold = Math.max(sold, hold + price - fee);
+            hold = Math.max(hold, t - price);
+        }
+        return sold;
+    }
 }

@@ -6,8 +6,8 @@ public class WildcardMatching {
         
         while (i < s.length()) {
            if (j < p.length() && (p.charAt(j) == '?' || p.charAt(j) == s.charAt(i))) {
-               ++i;
-               ++j;
+               i++;
+               j++;
            } else if (j < p.length() && p.charAt(j) == '*') {
                starIndex = j;        
                iIndex = i;
@@ -22,7 +22,7 @@ public class WildcardMatching {
        }
 
        while (j < p.length() && p.charAt(j) == '*') {
-           ++j;
+           j++;
        }
        
        return j == p.length();

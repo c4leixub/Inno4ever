@@ -45,7 +45,6 @@ public class MaxStack {
         int max = maxStack.pop();
         stack.pop();
         
-        
         while (!tempStack.isEmpty()) {
             push(tempStack.pop());
         }

@@ -91,16 +91,16 @@ public class ParseCSV {
 		int i = '9' - '0';
 		System.out.println(i);
 		
-//		String s = "John,Smith,john.smith@gmail.com,Los Angeles,1\n"
-//				+ "Jane,Roberts,janer@msn.com,\"San Francisco, CA\",0\n"
-//				+ "\"Alexandra \"\"Alex\"\"\",Menendez,alex.menendez@gmail.com,Miami,1\n"
-//				+ "\"\"\"Alexandra Alex\"\"\"";
-//		
-//		ParseCSV p = new ParseCSV();
-//		
-//		System.out.println(p.parseCSV(s));
-//		
-//		s = "aa,bb,\"aa\",\"aa,bb\",\"aa\"\"aa\"\"\"";
-//		System.out.println(p.parseCSV(s));
+		String s = "John,Smith,john.smith@gmail.com,Los Angeles,1\n"
+				+ "Jane,Roberts,janer@msn.com,\"San Francisco, CA\",0\n"
+				+ "\"Alexandra \"\"Alex\"\"\",Menendez,alex.menendez@gmail.com,Miami,1\n"
+				+ "\"\"\"Alexandra Alex\"\"\"";
+		
+		ParseCSV p = new ParseCSV();
+		
+		System.out.println(p.parseCSV(s));
+		
+		s = "aa,bb,\"aa\",\"aa,bb\",\"aa\"\"aa\"\"\"";
+		System.out.println(p.parseCSV(s));
 	}
 }

@@ -36,13 +36,18 @@ public class IntegerToWord {
 		map.put(90, "Ninety");
     }
 
-	public String numberToWords(int num) {
-		StringBuilder sb = new StringBuilder();
-
+    public String numberToWords(int num) {
 		if (num == 0) {
 			return map.get(0);
 		}
 
+        StringBuilder sb = new StringBuilder();
+        int[] p = new int[] {num};
+        convert(p, sb, 1000000000, "Billion");
+        convert(p, sb, 1000000, "Million");
+        convert(p, sb, 1000, "Thousand");
+        
+        /*
 		if (num >= 1000000000) {
 			int extra = num / 1000000000;
 			sb.append(convert(extra) + " Billion");
@@ -60,13 +65,22 @@ public class IntegerToWord {
 			sb.append(convert(extra) + " Thousand");
 			num = num % 1000;
 		}
+        */
 
 		if (num > 0) {
 			sb.append(convert(num));
 		}
 
 		return sb.toString().trim();
-	}
+    }
+    
+    public void convert(int[] num, StringBuilder sb, int div, String text) {
+        if (num[0] >= div) {
+            int d = num[0] / div;
+            sb.append(convert(d) + " " + text);
+            num[0] = num[0] % div;
+        }
+    }
 
 	public String convert(int num) {
 
