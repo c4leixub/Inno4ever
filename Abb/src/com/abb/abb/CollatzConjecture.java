@@ -1,4 +1,4 @@
-package com.abb.math;
+package com.abb.abb;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +25,7 @@ public class CollatzConjecture {
 			} else {
 				num = 3 * num + 1;
 			}
+			//System.out.println(num);
 			steps++;
 		}
 		

@@ -1,7 +1,6 @@
 package com.abb.abb;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,8 +11,10 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-public class HostCrowding {
-	public List<String> displayPages(List<String> input, int pageSize) {
+public class Pagination {
+	
+	// complexity O(n^2) , space O(n)
+	public List<String> displayPages(List<String> input, int pageSize) {	
 		LinkedList<String> res = new LinkedList<>();
 		Iterator<String> iter = input.iterator();
 		Set<String> set = new HashSet<>();
@@ -29,8 +30,6 @@ public class HostCrowding {
 				counter++;
 			}
 			if (counter == pageSize) {
-				if (!input.isEmpty())
-					res.add(" ");
 				set.clear();
 				counter = 0;
 				reachEnd = false;
@@ -53,7 +52,7 @@ public class HostCrowding {
 			this.score = score;
 		}
 	}
-	public List<List<String>> pagination(List<String> input, int pageSize) {
+	public List<List<String>> pagination(List<String> input, int pageSize) { // O(n _ nlogn)
 		List<List<String>> result = new ArrayList<List<String>>();
 		
 		Map<String, LinkedList<Entry>> m = new HashMap<String, LinkedList<Entry>>();
@@ -96,14 +95,15 @@ public class HostCrowding {
 					list.add(e.listing);
 					if (entryList.size() > 0) ids.add(id);
 				} else {
-					if (ids.isEmpty()) break;
+					if (ids.isEmpty()) break;	// at the last page
+					
 					pq.addAll(ids);
 					ids = new HashSet<String>();
 				}
 			}
 			
 			result.add(list);
-			pq.addAll(ids);
+			if (!ids.isEmpty()) pq.addAll(ids);
 		}
 		
 		return result;
@@ -127,10 +127,25 @@ public class HostCrowding {
 
 		int pageSize = 5;
 
-		HostCrowding h = new HostCrowding();
-		System.out.println(
-		//		h.displayPages(input, pageSize)
-				h.pagination(input, pageSize)
-		);
+		Pagination h = new Pagination();
+		
+		List<String> result = h.displayPages(input, pageSize); 
+		int i = 0;
+		for (String s : result) {
+			System.out.println(s);
+			i++;
+			if (i % pageSize == 0) {
+				System.out.println("-----------------------------");
+			}
+		}
+		
+//		List<List<String>> res = h.pagination(input, pageSize);
+//		for (List<String> list : res) {
+//			for (String s : list) {
+//				System.out.println(s);
+//			}
+//			System.out.println("-----------------------------");
+//		}
+		
 	}
 }

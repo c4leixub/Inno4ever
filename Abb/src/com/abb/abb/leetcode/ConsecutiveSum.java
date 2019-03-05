@@ -1,4 +1,4 @@
-package com.abb.abb;
+package com.abb.abb.leetcode;
 
 /**
  * O(sqrt(n)) 对于一个正整数N，能写成K个连续正整数相加的形式，则有

@@ -30,6 +30,12 @@ public class TravelBuddy {
 	private List<Buddy> buddies;
 	private Set<String> myWishList;
 
+	/**
+	 * Everyone has a wish list of cities, if the cities you wish and other's wish cities match 50% 
+	 * then the other is your travel buddy.
+	 * @param myWishList
+	 * @param friendsWishList
+	 */
 	public TravelBuddy(Set<String> myWishList, Map<String, Set<String>> friendsWishList) {
 		this.buddies = new ArrayList<>();
 		this.myWishList = myWishList;
@@ -56,6 +62,7 @@ public class TravelBuddy {
 	}
 
 	/*
+	 * followup: recommend at most k cities
 	 * 是给了一个k值，找出你的buddy的wishlist里不在你的wishlist里的最多max个城市 
 	 * 根据buddy和你的重合程度来排序
 	 */

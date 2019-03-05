@@ -83,6 +83,11 @@ public class TextJustification {
 		for (String s : t.fullJustify(words, 16)) {
 			System.out.println("\"" + s + "\"");
 		}
+		
+		words = new String[] {"my", "second", "sentence"};
+		for (String s : t.fullJustify(words, 16)) {
+			System.out.println("\"" + s + "\"");
+		}
 	}
 	
 }

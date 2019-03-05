@@ -1,4 +1,4 @@
-package com.abb.string;
+package com.abb.trie;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,6 +6,7 @@ import java.util.List;
 
 public class PalindromePair {
 	
+	// O(N * L^2), where L is average length of a words
 	public List<List<Integer>> palindromePairs(String[] words) {
         
         List<List<Integer>> result = new ArrayList<List<Integer>>();

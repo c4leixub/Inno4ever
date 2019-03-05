@@ -3,6 +3,15 @@ package com.abb.abb;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Implement two functions, create and get, with following behaviour
+ * create("/a",1), return true;
+ * get("/a"), return 1;
+ * create("/a/b",2), return true;
+ * get("/a/b"), return 2;
+ * create("/c/d",1), return false, '/c' not exist
+ * get("/c"), return null, '/c' not exist
+ */
 public class PathSystem {
 
 	Map<String, Integer> pathMap;
@@ -60,6 +69,7 @@ public class PathSystem {
 		}
 	}
 
+	// follow up: 
 	public boolean watch(String path, Runnable callback) {
 		if (!pathMap.containsKey(path)) {
 			return false;

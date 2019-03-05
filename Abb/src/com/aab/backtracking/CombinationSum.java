@@ -1,10 +1,12 @@
 package com.aab.backtracking;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CombinationSum {
 	
+	// candidate contains not duplicates
 	public List<List<Integer>> combinationSum1(int[] candidates, int target) {
 
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
@@ -26,9 +28,11 @@ public class CombinationSum {
 		}
 	}
 	
+	// candidates contains duplicate
 	public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         
         List<List<Integer>> result = new ArrayList<List<Integer>>();
+        Arrays.sort(candidates);
         dfs2(result, new ArrayList<Integer>(), candidates, 0, target);
         return result;
     }
@@ -41,12 +45,17 @@ public class CombinationSum {
         }
         
         for (int i = s; i < candidates.length; i++) {
+        	if (i != s && candidates[i] == candidates[i-1]) {
+                continue;
+            }
+        	
             list.add(candidates[i]);
             dfs2(result, list, candidates, i, target-candidates[i]);
             list.remove(list.size()-1);
         }
     }
     
+    // choose from 1-9, find combination of k numbers add up equals n
     public List<List<Integer>> combinationSum3(int k, int n) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
         dfs3(result, new ArrayList<Integer>(), k, n, 1);

@@ -57,6 +57,13 @@ public class PourWater {
 		
 		re = pw.pourWater(heights, V, K);
 		print(re);
+		
+		heights = new int[] {5,4,2,1,2,3,2,1,0,1,2,4};
+		V = 8;
+		K = 5;
+		
+		re = pw.pourWater(heights, V, K);
+		print(re);
 	}
 	
 	private static void print(int[] re) {

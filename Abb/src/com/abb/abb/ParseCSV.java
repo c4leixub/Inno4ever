@@ -8,6 +8,9 @@ John,Smith,john.smith@gmail.com,Los Angeles,1
 Jane,Roberts,janer@msn.com,"San Francisco, CA",0
 "Alexandra ""Alex""",Menendez,alex.menendez@gmail.com,Miami,1
 """Alexandra Alex"""
+
+become
+
 John|Smith|john.smith@gmail.com|Los Angeles|1
 Jane|Roberts|janer@msn.com|San Francisco, CA|0
 Alexandra "Alex"|Menendez|alex.menendez@gmail.com|Miami|1
@@ -31,7 +34,7 @@ public class ParseCSV {
 		for (int i = 0; i < str.length(); i++) {
 			if (inQuote) {
 				if (str.charAt(i) == '\"') {
-					if (i < str.length() - 1 && str.charAt(i + 1) == '\"') {
+					if (i < str.length() - 1 && str.charAt(i + 1) == '\"') {	// combine "" to "
 						sb.append("\"");
 						i++;
 					} else {
@@ -59,13 +62,11 @@ public class ParseCSV {
 	}
 
 	public static void main(String[] args) {
-		int i = '9' - '0';
-		System.out.println(i);
 
 		String s = "John,Smith,john.smith@gmail.com,Los Angeles,1\n"
 				+ "Jane,Roberts,janer@msn.com,\"San Francisco, CA\"a,0\n"
 				+ "\"Alexandra \"\"Alex\"\"\",Menendez,alex.menendez@gmail.com,Miami,1\n"
-				+ "\"\"\"Alexandra Alex\"\"\"";
+				+ " \"Alexandra \"\"\"Alex\"\"\"\" ";
 
 		ParseCSV p = new ParseCSV();
 
@@ -73,5 +74,10 @@ public class ParseCSV {
 
 		s = "aa,bb,\"aa\",\"aa,bb\",\"aa\"\"aa\"\"\"";
 		System.out.println(p.parseCSV(s));
+		
+		System.out.println(" \"Alexandra \"\"Alex\"\"\" ");
+		System.out.println(" \"Alexandra \"\"\"\"Alex\"\"\"\"\" ");
+		
+		System.out.println(p.parseCSV(" \"Alexandra \"\"\"\"Alex\"\"\"\"\" "));
 	}
 }

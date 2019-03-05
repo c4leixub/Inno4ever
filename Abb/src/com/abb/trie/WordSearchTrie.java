@@ -39,13 +39,13 @@ public class WordSearchTrie {
             p.isEnd = true;
         }
     }
-	
+		
 	public List<String> findWords(char[][] board, String[] words) {
         Trie trie = new Trie();
 		for (String word : words) {
 			trie.insert(word); 
         }
-
+		
 		int m = board.length, n = board[0].length;
 		boolean[][] visited = new boolean[m][n];
 		List<String> result = new ArrayList<String>();

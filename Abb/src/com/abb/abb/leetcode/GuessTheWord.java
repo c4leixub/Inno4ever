@@ -1,4 +1,4 @@
-package com.abb.abb;
+package com.abb.abb.leetcode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
