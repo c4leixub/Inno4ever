@@ -8,7 +8,7 @@ import com.common.structs.TreeNode;
 
 public class ZigzagOrderTraversal {
 	public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
 		if (root == null) {
 			return result;
 		}
@@ -16,7 +16,7 @@ public class ZigzagOrderTraversal {
 		Stack<TreeNode> cur = new Stack<TreeNode>();
 		Stack<TreeNode> next = new Stack<TreeNode>();
 		Stack<TreeNode> t;
-        boolean isLeftFirst = true;
+		boolean isLeftFirst = true;
 
 		TreeNode node;
 		cur.add(root);
@@ -27,23 +27,23 @@ public class ZigzagOrderTraversal {
 				node = cur.pop();
 				list.add(node.val);
 
-                if (isLeftFirst) {
-                    if (node.left != null) {
-					next.add(node.left);
-                    }
-                    if (node.right != null) {
-                        next.add(node.right);
-                    }
-                } else {
-                    if (node.right != null) {
-                        next.add(node.right);
-                    }
-                    if (node.left != null) {
-					next.add(node.left);
-                    }
-                }
+				if (isLeftFirst) {
+					if (node.left != null) {
+						next.add(node.left);
+					}
+					if (node.right != null) {
+						next.add(node.right);
+					}
+				} else {
+					if (node.right != null) {
+						next.add(node.right);
+					}
+					if (node.left != null) {
+						next.add(node.left);
+					}
+				}
 			}
-            isLeftFirst = !isLeftFirst;
+			isLeftFirst = !isLeftFirst;
 
 			result.add(list);
 			t = cur;
@@ -52,5 +52,5 @@ public class ZigzagOrderTraversal {
 		}
 
 		return result;
-    }
+	}
 }

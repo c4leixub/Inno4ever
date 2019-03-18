@@ -10,6 +10,7 @@ public class BSTSerialization {
 		return sb.toString();
     }
 	
+	// pre-order traversal
 	private void serializeHelper(TreeNode root, StringBuilder sb) {
 		if (root == null) {
 			return;
@@ -30,13 +31,14 @@ public class BSTSerialization {
         if (vals.length == 0)
 			return null;
 
-        // TreeNode root = deserializeHelper(vals, new int[]{0}, Integer.MIN_VALUE, Integer.MAX_VALUE);
-		TreeNode root = new TreeNode(Integer.parseInt(vals[0]));
-		int nextVal;    	
-		for (int i = 1; i < vals.length; i++) {
-			nextVal = Integer.parseInt(vals[i]);
-			insert(root, nextVal);
-		}
+        TreeNode root = deserializeHelper(vals, new int[]{0}, Integer.MIN_VALUE, Integer.MAX_VALUE);
+
+ //		TreeNode root = new TreeNode(Integer.parseInt(vals[0]));
+//		int nextVal;    	
+//		for (int i = 1; i < vals.length; i++) {
+//			nextVal = Integer.parseInt(vals[i]);
+//			insert(root, nextVal);
+//		}
 		
     	return root;
     }

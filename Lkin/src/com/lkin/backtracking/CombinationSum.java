@@ -1,8 +1,11 @@
 package com.lkin.backtracking;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+// Time O((n+k)!) where k is the max repeated times for each candidate
+// Space O(m) where m is the size of the solution
 public class CombinationSum {
 	
 	public List<List<Integer>> combinationSum1(int[] candidates, int target) {
@@ -29,6 +32,7 @@ public class CombinationSum {
 	public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         
         List<List<Integer>> result = new ArrayList<List<Integer>>();
+        Arrays.sort(candidates);
         dfs2(result, new ArrayList<Integer>(), candidates, 0, target);
         return result;
     }
@@ -41,6 +45,10 @@ public class CombinationSum {
         }
         
         for (int i = s; i < candidates.length; i++) {
+        	if (i != s && candidates[i] == candidates[i-1]) {
+                continue;
+            }
+        	
             list.add(candidates[i]);
             dfs2(result, list, candidates, i, target-candidates[i]);
             list.remove(list.size()-1);

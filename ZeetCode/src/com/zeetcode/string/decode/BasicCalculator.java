@@ -2,6 +2,11 @@ package com.zeetcode.string.decode;
 
 import java.util.Stack;
 
+/**
+ * implement a basic calculator to evaluate a simple expression string.
+ * The expression string may contain open ( and closing parentheses ), the plus
+ * + or minus sign -, non-negative integers and empty spaces .
+ */
 public class BasicCalculator {
 	public int calculate(String s) {
 		Stack<Integer> stack = new Stack<Integer>();

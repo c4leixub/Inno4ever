@@ -14,31 +14,29 @@ public class LargeValueInEachLevel {
 			return result;
 		}
 
-		Queue<TreeNode> cur = new LinkedList<TreeNode>();
-		Queue<TreeNode> next = new LinkedList<TreeNode>();
-		Queue<TreeNode> t;
-
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(root);
+		
+		int size, max;
 		TreeNode node;
-		cur.add(root);
-		while (!cur.isEmpty()) {
-
-			int max = Integer.MIN_VALUE;
-			while (!cur.isEmpty()) {
-				node = cur.poll();
+		while (!queue.isEmpty()) {
+			size = queue.size();
+			max = Integer.MIN_VALUE;
+			while (size > 0) {
+				node = queue.poll();
 				max = Math.max(max, node.val);
 
 				if (node.left != null) {
-					next.add(node.left);
+					queue.add(node.left);
 				}
 				if (node.right != null) {
-					next.add(node.right);
+					queue.add(node.right);
 				}
+				
+				size--;
 			}
 
 			result.add(max);
-			t = cur;
-			cur = next;
-			next = t;
 		}
 
 		return result;

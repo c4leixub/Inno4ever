@@ -70,31 +70,104 @@ public class EmployeeFreeTime {
 			}
 		}
 		Collections.sort(points);
-		
+
 		int count = 0;
 		Integer availableStart = null;
 		for (int i = 0; i < points.size(); i++) {
-			Point point = points.get(i); 
+			Point point = points.get(i);
 			if (point.isStart) {
 				count++;
 				if (availableStart == null && i == 0 && count <= schedule.size() - k) {
 					availableStart = point.time;
 				} else if (availableStart != null && count == schedule.size() - k + 1) {
 					res.add(new Interval(availableStart, point.time));
-					availableStart = null; 
+					availableStart = null;
 				}
-			} else { 
+			} else {
 				count--;
 				if (count == schedule.size() - k && i < points.size() - 1) {
 					availableStart = point.time;
-				} else if (availableStart != null && i == points.size() - 1
-								&& count <= schedule.size() - k) {
+				} else if (availableStart != null && i == points.size() - 1 && count <= schedule.size() - k) {
 					res.add(new Interval(availableStart, point.time));
-					availableStart = null; 
+					availableStart = null;
 				}
 			}
-		} 
-		
+		}
+
 		return res;
 	}
+	
+	public List<Interval> employeeFreeTime2(List<List<Interval>> schedule) {
+		List<Interval> res = new ArrayList<>();
+
+		List<Point> points = new ArrayList<>();
+		for (List<Interval> intervalList : schedule) {
+			for (Interval interval : intervalList) {
+				points.add(new Point(interval.start, true));
+				points.add(new Point(interval.end, false));
+			}
+		}
+		Collections.sort(points);
+
+		int count = 0;
+		Integer availableStart = null;
+		for (int i = 0; i < points.size(); i++) {
+			Point point = points.get(i);
+			if (point.isStart) {
+				count++;
+				if (availableStart == null && i == 0 && count <= 0) {
+					availableStart = point.time;
+				} else if (availableStart != null && count == 1) {
+					res.add(new Interval(availableStart, point.time));
+					availableStart = null;
+				}
+			} else {
+				count--;
+				if (count == 0 && i < points.size() - 1) {
+					availableStart = point.time;
+				} else if (availableStart != null && i == points.size() - 1 && count <= 0) {
+					res.add(new Interval(availableStart, point.time));
+					availableStart = null;
+				}
+			}
+		}
+
+		return res;
+	}
+
+	public static void main(String[] args) {
+		List<List<Interval>> intervals = new ArrayList<List<Interval>>() {
+			{
+				add(new ArrayList<Interval>() {
+					{
+						add(new Interval(1, 3));
+						add(new Interval(6, 7));
+					}
+				});
+				add(new ArrayList<Interval>() {
+					{
+						add(new Interval(2, 4));
+					}
+				});
+				add(new ArrayList<Interval>() {
+					{
+						add(new Interval(2, 3));
+						add(new Interval(9, 12));
+					}
+				});
+			}
+		};
+		
+		EmployeeFreeTime e = new EmployeeFreeTime();
+		List<Interval> res = e.employeeFreeTime(intervals, intervals.size());
+		System.out.println(res);
+		
+		res = e.employeeFreeTime(intervals);
+		System.out.println(res);
+		
+		res = e.employeeFreeTime2(intervals);
+		System.out.println(res);
+
+	}
+
 }

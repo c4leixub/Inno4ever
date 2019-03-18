@@ -13,32 +13,31 @@ public class LevelOrderTraversal {
 		if (root == null) {
 			return result;
 		}
+		
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(root);
 
-		Queue<TreeNode> cur = new LinkedList<TreeNode>();
-		Queue<TreeNode> next = new LinkedList<TreeNode>();
-		Queue<TreeNode> t;
-
+		int size;
 		TreeNode node;
-		cur.add(root);
-		while (!cur.isEmpty()) {
-
-			List<Integer> list = new ArrayList<Integer>();
-			while (!cur.isEmpty()) {
-				node = cur.poll();
+		List<Integer> list;
+		while (!queue.isEmpty()) {
+			size = queue.size();
+			list = new ArrayList<Integer>();
+			while (size > 0) {
+				node = queue.poll();
 				list.add(node.val);
 
 				if (node.left != null) {
-					next.add(node.left);
+					queue.add(node.left);
 				}
 				if (node.right != null) {
-					next.add(node.right);
+					queue.add(node.right);
 				}
+				
+				size--;
 			}
-
+			
 			result.add(list);
-			t = cur;
-			cur = next;
-			next = t;
 		}
 
 		return result;
