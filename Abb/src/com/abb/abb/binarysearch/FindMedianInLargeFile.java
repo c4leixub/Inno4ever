@@ -27,10 +27,7 @@ public class FindMedianInLargeFile {
 	}
 
 	public double findMedian(int[] nums) {
-		int len = 0;
-		for (int num : nums) {
-			len++;
-		}
+		int len = nums.length;
 
 		if (len % 2 == 1) {
 			return (double) search(nums, len / 2 + 1, Integer.MIN_VALUE, Integer.MAX_VALUE);

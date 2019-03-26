@@ -3,6 +3,9 @@ package com.abb.array.water;
 public class Waterland {
 	public void pourWater(int[] heights, int water, int location) {
 		int[] waters = new int[heights.length];
+		
+		print(heights, waters);
+		
 		int best;
 
 		while (water > 0) {
@@ -73,5 +76,11 @@ public class Waterland {
 		int location = 5;
 		
 		w.pourWater(heights, water, location);
+		
+		heights = new int[] {2,1,1,2,1,2,2};
+		water = 4; location = 3;
+		w.pourWater(heights, water, location);
+		
+		
 	}
 }

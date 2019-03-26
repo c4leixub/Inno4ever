@@ -129,23 +129,23 @@ public class Pagination {
 
 		Pagination h = new Pagination();
 		
-		List<String> result = h.displayPages(input, pageSize); 
-		int i = 0;
-		for (String s : result) {
-			System.out.println(s);
-			i++;
-			if (i % pageSize == 0) {
-				System.out.println("-----------------------------");
-			}
-		}
-		
-//		List<List<String>> res = h.pagination(input, pageSize);
-//		for (List<String> list : res) {
-//			for (String s : list) {
-//				System.out.println(s);
+//		List<String> result = h.displayPages(input, pageSize); 
+//		int i = 0;
+//		for (String s : result) {
+//			System.out.println(s);
+//			i++;
+//			if (i % pageSize == 0) {
+//				System.out.println("-----------------------------");
 //			}
-//			System.out.println("-----------------------------");
 //		}
+		
+		List<List<String>> res = h.pagination(input, pageSize);
+		for (List<String> list : res) {
+			for (String s : list) {
+				System.out.println(s);
+			}
+			System.out.println("-----------------------------");
+		}
 		
 	}
 }

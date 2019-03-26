@@ -2,6 +2,7 @@ package com.abb.abb;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,11 @@ public class TravelBuddy {
 
 		@Override
 		public int compareTo(Buddy o) {
-			return this.similarity - o.similarity;
+			return o.similarity - this.similarity;
+		}
+		
+		public String toString() {
+			return name;
 		}
 	}
 
@@ -88,6 +93,36 @@ public class TravelBuddy {
 		}
 
 		return res;
+	}
+	
+	public static void main(String[] args) {
+		Set<String> myWishList = new HashSet<>();
+		myWishList.add("a");
+		myWishList.add("b");
+		myWishList.add("c");
+		myWishList.add("d");
+		
+		Set<String> wishList;
+		Map<String, Set<String>> friendsWishList = new HashMap<String, Set<String>>();
+		
+		wishList = new HashSet<>();
+		wishList.add("a");
+		wishList.add("b");
+		wishList.add("e");
+		wishList.add("f");
+		friendsWishList.put("B1", wishList);
+		
+		wishList = new HashSet<>();
+		wishList.add("a");
+		wishList.add("c");
+		wishList.add("d");
+		wishList.add("g");
+		friendsWishList.put("B2", wishList);
+		
+		TravelBuddy t = new TravelBuddy(myWishList, friendsWishList);
+		System.out.println(t.getSortedBuddies());
+		
+		System.out.println(t.getRecommentCities(10));
 	}
 
 }

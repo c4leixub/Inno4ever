@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Flatten2DVector {
-	
 	private List<List<Integer>> vector;
     
 	private Iterator<List<Integer>> rowIterator;
@@ -59,6 +58,7 @@ public class Flatten2DVector {
     	int[][] v = new int[][] {{1,2},{3},{4}};
     	Flatten2DVector f = new Flatten2DVector(v);
     	
+    	f.next();
     	f.next();
     	f.next();
     	f.next();

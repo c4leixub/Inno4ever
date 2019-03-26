@@ -14,21 +14,19 @@ public class CollatzConjecture {
 
 	private Map<Long, Integer> map = new HashMap<>();
 
-	private int findSteps(long num) {
+	public int findSteps(long num) {
 		if (num == 1) return 1;
+		
 		if (map.containsKey(num)) return map.get(num); 
 		
 		int steps = 1;
-		while (num != 1) {
-			if (num % 2 == 0) {
-				num = num / 2;
-			} else {
-				num = 3 * num + 1;
-			}
-			//System.out.println(num);
-			steps++;
+		if (num % 2 == 0) {
+			steps += findSteps(num / 2);
+		} else {
+			steps += findSteps(3 * num + 1);
 		}
 		
+		map.put(num, steps);
 		return steps;
 	}
 	
@@ -38,7 +36,7 @@ public class CollatzConjecture {
 		
 		for (long i = 1; i <= num; i++) {
 			int t = findSteps(i);
-			map.put(i, t);
+			//map.put(i, t);
 			res = Math.max(res, t);
 		}
 		return res;
@@ -46,6 +44,7 @@ public class CollatzConjecture {
 	
 	public static void main(String[] args) {
 		CollatzConjecture c = new CollatzConjecture();
+		System.out.println(c.findSteps(14));
 		System.out.println(c.findLongestSteps(837799));
 	}
 }

@@ -11,6 +11,8 @@ import java.util.Map;
  * get("/a/b"), return 2;
  * create("/c/d",1), return false, '/c' not exist
  * get("/c"), return null, '/c' not exist
+ * follow up是写一个watch函数，比如watch("/a",new Runnable(){System.out.println("helloword");})后，
+ * 每当create("/a/b"，1) 等在/a之下的目录不产生error的话，都会执行绑在“/a”上的callback函数
  */
 public class PathSystem {
 

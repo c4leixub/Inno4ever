@@ -9,7 +9,7 @@ public class SlidingPuzzle {
 
 	class Node {
 		String boardStr;
-		int[] index;
+		int[] index;	// the index of 0
 
 		public Node(String boardStr, int[] index) {
 			this.boardStr = boardStr;
@@ -26,9 +26,13 @@ public class SlidingPuzzle {
 	 * 
 	 * Space Complexity: O(R * C * (R * C)!)
 	 */
-	public int slidingPuzzle(int[][] board, String correct) {
+	public int slidingPuzzle(int[][] board) {
 		int row = board.length, col = board[0].length;
 
+		// the solved puzzle
+		StringBuilder solvedBoardSB = new StringBuilder();
+		int s = 1;
+		
 		// build the string version of the board
 		StringBuilder boardSB = new StringBuilder();
 		int x = -1, y = -1;
@@ -39,9 +43,17 @@ public class SlidingPuzzle {
 					y = j;
 				}
 				boardSB.append(board[i][j]);
+				
+				if (i == row - 1 && j == col -1) {
+					solvedBoardSB.append(0);
+				} else {
+					solvedBoardSB.append(s);
+					s++;
+				}
 			}
 		}
-
+		
+		String solvedBoardStr = solvedBoardSB.toString();
 		Queue<Node> queue = new LinkedList<Node>();
 		queue.add(new Node(boardSB.toString(), new int[] { x, y }));
 
@@ -57,7 +69,7 @@ public class SlidingPuzzle {
 				node = queue.poll();
 				boardStr = node.boardStr;
 				index = node.index;
-				if (boardStr.equals(correct))
+				if (boardStr.equals(solvedBoardStr))
 					return res;
 
 				visited.add(boardStr);
@@ -92,18 +104,18 @@ public class SlidingPuzzle {
 		SlidingPuzzle s = new SlidingPuzzle();
 
 		int[][] board = new int[][] { { 1, 2, 3 }, { 4, 0, 5 } };
-		System.out.println(s.slidingPuzzle(board, "123450"));
+		System.out.println(s.slidingPuzzle(board));
 
 		board = new int[][] { { 1, 2, 3 }, { 5, 4, 0 } };
-		System.out.println(s.slidingPuzzle(board, "123450"));
+		System.out.println(s.slidingPuzzle(board));
 
 		board = new int[][] { { 4, 1, 2 }, { 5, 0, 3 } };
-		System.out.println(s.slidingPuzzle(board, "123450"));
+		System.out.println(s.slidingPuzzle(board));
 
 		board = new int[][] { { 3, 2, 4 }, { 1, 5, 0 } };
-		System.out.println(s.slidingPuzzle(board, "123450"));
+		System.out.println(s.slidingPuzzle(board));
 
 		board = new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 0, 8 } };
-		System.out.println(s.slidingPuzzle(board, "123456780"));
+		System.out.println(s.slidingPuzzle(board));
 	}
 }
