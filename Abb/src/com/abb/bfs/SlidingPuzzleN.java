@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Random;
 import java.util.Set;
 
 public class SlidingPuzzleN {
@@ -49,6 +50,22 @@ public class SlidingPuzzleN {
 					solvedBoardList.add(s);
 					s++;
 				}
+			}
+		}
+	}
+
+	public void shuffle() {
+		curBoardList.clear();
+		
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				
+				int r = 0; // some random value
+				if (r == 0) {
+					x0 = i;
+					y0 = j;
+				}
+				curBoardList.add(r);
 			}
 		}
 	}
@@ -101,6 +118,7 @@ public class SlidingPuzzleN {
 	}
 
 	public static void main(String[] args) {
+		/*
 		int[][] board = new int[][] { { 1, 2, 3 }, { 4, 0, 5 } };
 		SlidingPuzzleN s = new SlidingPuzzleN(board);
 		System.out.println(s.canSolve());
@@ -123,7 +141,7 @@ public class SlidingPuzzleN {
 
 		Set<List<Integer>> ss = new HashSet<>();
 		ss.add(abc);
-		//System.out.println(ss.contains(test));
+		// System.out.println(ss.contains(test));
 
 		board = new int[][] { { 1, 2, 3 }, { 5, 4, 0 } };
 		s = new SlidingPuzzleN(board);
@@ -132,7 +150,7 @@ public class SlidingPuzzleN {
 		board = new int[][] { { 4, 1, 2 }, { 5, 0, 3 } };
 		s = new SlidingPuzzleN(board);
 		System.out.println(s.canSolve());
-		
+
 		board = new int[][] { { 3, 2, 4 }, { 1, 5, 0 } };
 		s = new SlidingPuzzleN(board);
 		System.out.println(s.canSolve());
@@ -140,5 +158,6 @@ public class SlidingPuzzleN {
 		board = new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 0, 8 } };
 		s = new SlidingPuzzleN(board);
 		System.out.println(s.canSolve());
+		*/
 	}
 }

@@ -46,7 +46,7 @@ public class Subset {
 
 		for (int i = pos; i < nums.length; i++) {
 			tmp.add(nums[i]);
-			dfs(result, tmp, nums, i + 1);
+			dfs2(result, tmp, nums, i + 1);
 			tmp.remove(tmp.size() - 1);
 
 			// ignore duplicates
