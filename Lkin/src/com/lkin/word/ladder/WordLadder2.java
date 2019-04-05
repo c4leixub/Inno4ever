@@ -21,8 +21,7 @@ public class WordLadder2 {
 		}
 	}
 
-	public List<List<String>> findLadders(String start, String end,
-			Set<String> dict) {
+	public List<List<String>> findLadders(String start, String end, Set<String> dict) {
 		List<List<String>> result = new ArrayList<List<String>>();
 
 		LinkedList<WordNode> queue = new LinkedList<WordNode>();
@@ -30,7 +29,7 @@ public class WordLadder2 {
 
 		HashSet<String> visited = new HashSet<String>();
 		HashSet<String> unvisited = new HashSet<String>();
-		
+
 		unvisited.addAll(dict);
 		unvisited.add(end);
 
@@ -67,33 +66,33 @@ public class WordLadder2 {
 			preNumSteps = currNumSteps;
 
 			getNextWords(top, queue, currNumSteps, unvisited, visited);
-			
+
 		}
 
 		return result;
 	}
-	
+
 	private String replace(String s, int index, char c) {
-        char[] chars = s.toCharArray();
-        chars[index] = c;
-        return new String(chars);
-    }
-    
-    private void getNextWords(WordNode node, Queue<WordNode> queue, int numSteps,
-    							Set<String> unvisited, Set<String> visited) {
-        String word = node.word;
-    	
-    	for (char c = 'a'; c <= 'z'; c++) {
-            for (int i = 0; i < word.length(); i++) {
-                if (c == word.charAt(i)) {
-                    continue;
-                }
-                String nextWord = replace(word, i, c);
-                if (unvisited.contains(nextWord)) {
-                	queue.add(new WordNode(nextWord, numSteps+1, node));
-                	visited.add(nextWord);
-                }
-            }
-        }
-    }
+		char[] chars = s.toCharArray();
+		chars[index] = c;
+		return new String(chars);
+	}
+
+	private void getNextWords(WordNode node, Queue<WordNode> queue, int numSteps, Set<String> unvisited,
+			Set<String> visited) {
+		String word = node.word;
+
+		for (char c = 'a'; c <= 'z'; c++) {
+			for (int i = 0; i < word.length(); i++) {
+				if (c == word.charAt(i)) {
+					continue;
+				}
+				String nextWord = replace(word, i, c);
+				if (unvisited.contains(nextWord)) {
+					queue.add(new WordNode(nextWord, numSteps + 1, node));
+					visited.add(nextWord);
+				}
+			}
+		}
+	}
 }

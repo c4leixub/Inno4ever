@@ -10,7 +10,6 @@ import java.util.PriorityQueue;
 public class SortCharByFrequency {
 	public String frequencySortHeap(String s) {
 		
-		
 		final Map<Character, Integer> counts = new HashMap<Character, Integer>();
 		for (int i = 0; i < s.length(); i++) {
 			counts.put(s.charAt(i), counts.getOrDefault(s.charAt(i), 0) + 1);

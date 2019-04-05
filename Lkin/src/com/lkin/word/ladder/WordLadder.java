@@ -23,8 +23,9 @@ public class WordLadder {
 		for (String word : wordList) {
 			dict.add(word);
 		}
-		
-		if (!dict.contains(endWord)) return 0;
+
+		if (!dict.contains(endWord))
+			return 0;
 
 		Queue<WordNode> queue = new LinkedList<WordNode>();
 		queue.add(new WordNode(beginWord, 1));

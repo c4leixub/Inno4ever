@@ -1,4 +1,4 @@
-package com.lkin.trees.topBottom;
+package com.lkin.trees;
 
 import com.common.structs.TreeNode;
 

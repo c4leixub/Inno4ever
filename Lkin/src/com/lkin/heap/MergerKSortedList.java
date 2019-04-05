@@ -12,12 +12,11 @@ public class MergerKSortedList {
 		ListNode dummy = new ListNode(0);
 		ListNode p = dummy, node = null;
 
-		PriorityQueue<ListNode> queue = new PriorityQueue<ListNode>(lists.length,
-			new Comparator<ListNode>() {
-				public int compare(ListNode l1, ListNode l2) {
-	                return l1.val - l2.val;
-	            }
-        	});
+		PriorityQueue<ListNode> queue = new PriorityQueue<ListNode>(lists.length, new Comparator<ListNode>() {
+			public int compare(ListNode l1, ListNode l2) {
+				return l1.val - l2.val;
+			}
+		});
 
 		Map<ListNode, Integer> nodeToIndex = new HashMap<ListNode, Integer>();
 		for (int i = 0; i < lists.length; i++) {
