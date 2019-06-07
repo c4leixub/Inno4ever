@@ -13,36 +13,35 @@ import java.util.List;
  * 11110 11010 11000 00000 Answer: 1
  */
 public class NumberOfIsland {
-	private int[][] DIRECTION = new int[][] {
-        {-1, 0}, {1, 0}, {0, -1}, {0, 1}
-    };
-	
+	private int[][] DIRECTION = new int[][] { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+
 	public int numIslands(char[][] grid) {
 		if (grid == null || grid.length == 0 || grid[0].length == 0)
 			return 0;
 
 		int m = grid.length, n = grid[0].length, count = 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (grid[i][j] == '1') {
-                    dfs(grid, m, n, i, j);
-                    count++;
-                }
-            }
-        }
-        return count;
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				if (grid[i][j] == '1') {
+					dfs(grid, m, n, i, j);
+					count++;
+				}
+			}
+		}
+		return count;
 	}
+
 	private void dfs(char[][] grid, int m, int n, int i, int j) {
-        if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == '0') {
-            return;
-        }
-        
-        grid[i][j] = '0';
-        
-        for (int[] direction : DIRECTION) {
-            dfs(grid, m, n, i + direction[0], j + direction[1]);
-        }
-    }
+		if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == '0') {
+			return;
+		}
+
+		grid[i][j] = '0';
+
+		for (int[] direction : DIRECTION) {
+			dfs(grid, m, n, i + direction[0], j + direction[1]);
+		}
+	}
 
 	public List<Integer> numIslands2(int m, int n, int[][] positions) {
 		int[] rootArray = new int[m * n];
@@ -63,9 +62,8 @@ public class NumberOfIsland {
 				int i = p[0] + directions[r][0];
 				int j = p[1] + directions[r][1];
 
-				if (0 <= i && i < m && 0 <= j  && j < n	
-						&& rootArray[i * n + j] != -1) {
-					
+				if (0 <= i && i < m && 0 <= j && j < n && rootArray[i * n + j] != -1) {
+
 					// get neighbor's root
 					int thisRoot = getRoot(rootArray, i * n + j);
 					if (thisRoot != index) {
@@ -90,8 +88,7 @@ public class NumberOfIsland {
 
 	public static void main(String[] args) {
 		NumberOfIsland s = new NumberOfIsland();
-		int[][] positions = new int[][] { { 0, 0 }, { 0, 1 }, { 1, 2 },
-				{ 2, 1 } };
+		int[][] positions = new int[][] { { 0, 0 }, { 0, 1 }, { 1, 2 }, { 2, 1 } };
 		System.out.println(s.numIslands2(3, 3, positions));
 	}
 }

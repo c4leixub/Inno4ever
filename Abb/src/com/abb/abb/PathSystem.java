@@ -81,5 +81,9 @@ public class PathSystem {
 		return true;
 	}
 	
+	public static void main(String[] args) {
+		System.out.println("/a".substring(0, 0));
+	}
+	
 	
 }

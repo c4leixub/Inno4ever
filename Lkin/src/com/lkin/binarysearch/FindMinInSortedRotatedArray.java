@@ -41,8 +41,7 @@ public class FindMinInSortedRotatedArray {
 
 		return findMinRecursive(nums, left, right);
 	}
-
-	public int findMinRecursive(int[] nums, int left, int right) {
+	private int findMinRecursive(int[] nums, int left, int right) {
 		if (left > right)
 			return nums[left];
 
@@ -93,7 +92,7 @@ public class FindMinInSortedRotatedArray {
 	public int findMinWithDuplicateRecursive(int[] num) {
 		return findMin(num, 0, num.length - 1);
 	}
-	public int findMin(int[] num, int left, int right) {
+	private int findMin(int[] num, int left, int right) {
 		if (right == left) {
 			return num[left];
 		}

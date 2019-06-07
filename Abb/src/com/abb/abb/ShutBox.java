@@ -28,6 +28,37 @@ public class ShutBox {
 		return tileSum == 0;
 	}
 	
+	private void flip(int i, int j) {
+		if (i == j) {
+			isTileFliped[i] = true;
+			tileSum -= i;
+		} else {
+			isTileFliped[i] = true;
+			isTileFliped[j] = true;
+			tileSum -= (i+j);
+		}
+	}
+	
+	public int firstAvailiableStrategy(int player) {
+		int num;
+		while (true) {
+			for (int i = 0; i < player; i++) {
+				num = (i % player + 1);
+				
+				if (play()) {
+					//System.out.println("Player " + num + " flips.");
+				} else {
+					//System.out.println("Player " + num + " idle.");
+				}
+				
+				if (hasWon()) {
+					System.out.println("Player " + num + " win.");
+					return num;
+				}
+			}
+		}
+	}
+	
 	public boolean play() {
 		int d1 = (dice1.nextInt(9) + 1), d2 = (dice2.nextInt(9) + 1);
 		int sum = d1 + d2;
@@ -52,44 +83,21 @@ public class ShutBox {
 		return false;
 	}
 	
-	private void flip(int i, int j) {
-		if (i == j) {
-			isTileFliped[i] = true;
-			tileSum -= i;
-		} else {
-			isTileFliped[i] = true;
-			isTileFliped[j] = true;
-			tileSum -= (i+j);
-		}
-	}
-	
-	public void similuate(int player) {
+	public static void main(String[] args) {
+		ShutBox box;
 		
-		int num;
-		while (true) {
-			for (int i = 0; i < player; i++) {
-				num = (i % player + 1);
-				if (play()) {
-					System.out.println("Player " + num + " flips.");
-				} else {
-					System.out.println("Player " + num + " idle.");
-				}
-				
-				if (hasWon()) {
-					System.out.println("Player " + num + " win.");
-					return;
-				}
+		int c1 = 0, c2 = 0, whoWon;
+		for (int i = 0; i < 100; i++) {
+			box = new ShutBox();
+			whoWon = box.firstAvailiableStrategy(2);
+			if (whoWon == 1) {
+				c1++;
+			} else {
+				c2++;
 			}
 		}
-	}
-	
-	public void dfs() {
 		
-		
-	}
-	
-	public static void main(String[] args) {
-		ShutBox box = new ShutBox();
-		box.similuate(2);
+		System.out.println(c1 + " " + c2);
+		System.out.println("P1 win rate: " + (c1 / 100.0) + " P2 win rate: " + (c2 / 100.0));
 	}
 }

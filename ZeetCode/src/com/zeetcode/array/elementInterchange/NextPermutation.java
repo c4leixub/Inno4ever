@@ -6,7 +6,8 @@ public class NextPermutation {
 			return;
 		}
 
-		// scan from right to left, find the 1st element that is less than its previous one
+		// scan from right to left, find the 1st element that is less than its previous
+		// one
 		int p = 0;
 		int i = nums.length - 2;
 		while (i >= 0) {
@@ -37,7 +38,7 @@ public class NextPermutation {
 		int t = nums[p];
 		nums[p] = nums[q];
 		nums[q] = t;
-		
+
 		// reverse elements [p+1, nums.length]
 		if (p < nums.length - 1) {
 			reverse(nums, p + 1, nums.length - 1);

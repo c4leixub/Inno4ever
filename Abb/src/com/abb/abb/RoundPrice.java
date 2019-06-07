@@ -46,15 +46,15 @@ public class RoundPrice {
 		int floorSum = 0;
 		for (int i = 0; i < n; i++) {
 			int floor = (int) arr[i];
-			int ceil = floor < arr[i] ? floor + 1 : floor;
+			int ceil = floor +1; //floor < arr[i] ? floor + 1 : floor;
 
 			floorSum += floor;
 			sum += arr[i];
 			arrWithDiff[i] = new NumWithDiff(ceil, ceil - arr[i]);
 		}
 
-		int num = (int) Math.round(sum);
-		int diff = num - floorSum;
+		int roundSum = (int) Math.round(sum);
+		int diff = roundSum - floorSum;
 		Arrays.sort(arrWithDiff, new Comparator<NumWithDiff>() {
 			@Override
 			public int compare(NumWithDiff n1, NumWithDiff n2) {
@@ -66,12 +66,22 @@ public class RoundPrice {
 		
 		int[] res = new int[n];
 		int i = 0;
-		while (i < diff) {	// use ceil
-			res[i] = arrWithDiff[i].ceil; 
-			i++;
-		}
-		while (i < n) {	// the rest use floor
-			res[i] = arrWithDiff[i].ceil-1;	
+//		while (i < diff) {	// use ceil
+//			res[i] = arrWithDiff[i].ceil; 
+//			i++;
+//		}
+//		while (i < n) {	// the rest use floor
+//			res[i] = arrWithDiff[i].ceil-1;	
+//			i++;
+//		}
+		
+		while (i < n) {
+			if (diff > 0) {	// use ceil
+				res[i] = arrWithDiff[i].ceil;
+				diff--;
+			} else {	// use floor
+				res[i] = arrWithDiff[i].ceil-1;	
+			}
 			i++;
 		}
 		

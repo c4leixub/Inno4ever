@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-public class TopKElements {
+public class TopKFrequentElements {
 	public List<Integer> topKFrequent(int[] nums, int k) {
 		List<Integer> result = new LinkedList<Integer>();
 		if (nums == null || nums.length == 0 || k == 0) {

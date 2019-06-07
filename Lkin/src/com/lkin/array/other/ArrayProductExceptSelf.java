@@ -2,24 +2,6 @@ package com.lkin.array.other;
 
 public class ArrayProductExceptSelf {
 
-	public int[] productExceptSelf(int[] nums) {
-		if (nums == null || nums.length < 2) {
-			return nums;
-		}
-
-		int product = 1;
-		for (int i = 0; i < nums.length; i++) {
-			product = product * nums[i];
-		}
-
-		int[] result = new int[nums.length];
-		for (int i = 0; i < nums.length; i++) {
-			result[i] = product / nums[i];
-		}
-
-		return result;
-	}
-
 	public int[] productExceptSelfWithoutDiv(int[] nums) {
 		// suppose nums = {2, 4, 6, 8}
 		int[] result = new int[nums.length];
