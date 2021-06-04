@@ -43,7 +43,7 @@ public class MeetingRoom {
 				return i1.start - i2.start;
 			}
 		});
-
+		
 		PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
 		int count = 1;
 		queue.offer(intervals[0].end);

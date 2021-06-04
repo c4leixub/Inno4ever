@@ -23,7 +23,7 @@ public class MaxStack {
     }
     
     public int pop() {
-        if (top() == peekMax()) {
+        if (stack.peek() == peekMax()) {
             maxStack.pop();
         }
         return stack.pop();

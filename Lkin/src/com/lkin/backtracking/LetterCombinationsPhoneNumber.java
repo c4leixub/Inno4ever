@@ -25,7 +25,6 @@ public class LetterCombinationsPhoneNumber {
 		}
 
 		dfs(digits, 0, new StringBuilder(), result);
-
 		return result;
 	}
 
